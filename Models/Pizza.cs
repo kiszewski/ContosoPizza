@@ -10,4 +10,6 @@ public class Pizza
     [MaxLength(100)]
     public string? Name { get; set; }
     public bool IsGlutenFree { get; set; }
+
+    public ICollection<Topping>? Toppings { get; set; }
 }
