@@ -8,29 +8,32 @@ namespace ContosoPizza.Controllers;
 [Route("[controller]")]
 public class PizzaController : ControllerBase
 {
-    public PizzaController()
+    private readonly PizzaService _service;
+
+    public PizzaController(PizzaService service)
     {
+        this._service = service;
     }
 
     [HttpGet]
-    public IEnumerable<Pizza> GetAll() => PizzaService.GetAll();
+    public IEnumerable<Pizza> GetAll() => _service.GetAll();
 
     [HttpGet("{id}")]
-    public Pizza? GetById(int id) => PizzaService.Get(id);
+    public Pizza? GetById(int id) => _service.Get(id);
 
     [HttpPost]
     public IActionResult Create(Pizza pizza)
     {
-        var result = PizzaService.Add(pizza);
+        var pizzaCreated = _service.Add(pizza);
 
-        return result ? CreatedAtAction("CREATE", pizza) : BadRequest();
+        return pizzaCreated != null ? CreatedAtAction("CREATE", pizzaCreated) : BadRequest();
     }
 
     [HttpPut("{id}")]
     public IActionResult Update(int id, Pizza pizza)
     {
         pizza.Id = id;
-        var result = PizzaService.Update(pizza);
+        var result = _service.Update(pizza);
 
         return result ? CreatedAtAction("UPDATE", pizza) : BadRequest();
     }
@@ -38,7 +41,7 @@ public class PizzaController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        PizzaService.Delete(id);
+        _service.Delete(id);
 
         return NoContent();
     }
