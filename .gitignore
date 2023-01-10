@@ -454,3 +454,5 @@ $RECYCLE.BIN/
 
 *.swp
 *.env
+ContosoPizza.db-wal
+ContosoPizza.db-shm
