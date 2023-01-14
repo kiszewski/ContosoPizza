@@ -9,5 +9,5 @@ public partial class Coupon
 
     public string Description { get; set; } = null!;
 
-    public string? Expiration { get; set; }
+    public DateTime? Expiration { get; set; }
 }
