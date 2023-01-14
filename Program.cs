@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSqlite<PizzaContext>("Data Source=ContosoPizza.db");
+builder.Services.AddSqlite<PromotionsContext>("Data Source=Promotions/Promotions.db");
 builder.Services.AddScoped<PizzaService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
